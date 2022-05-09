@@ -12,7 +12,7 @@
         <input type="text" name="username" id=" " placeholder="Digite seu usuário:">
         <div class="messages"></div>
         <input type="text" name="message" id=" " placeholder="Digite sua mensagem:">
-        <button type="submit">Enviar</button>
+        <button>Enviar</button>
         <button type="reset">reset</button>
 
     </form>
@@ -25,11 +25,11 @@
             $('.messages').append('<div class = "message"><strong>'+ message.author + '</strong>:'+ message.message + '</div>');
         };
 
-        socket.on(receivedMessage, function(message){
+        socket.on('receivedMessage', function(message){
             renderMessage(message);
         });
 
-        $('#chat').submit(function(event){
+        $('#chat').click(function(event){
             event.preventDefault();
 
             var author = $('input[name=username]').val();
@@ -41,7 +41,7 @@
                     message: message,
                 };
 
-                renderMessage(messageObject);
+                
                 socket.emit('sendMessage', messageObject);
             }
         })
